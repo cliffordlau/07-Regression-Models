@@ -13,4 +13,10 @@ y <- c(1.39, 0.72, 1.55, 0.48, 1.19, -1.59, 1.23, -0.65, 1.49, 0.05)
 s <- lm(y~x-1)
 
 # Q3
+library(dplyr)
 data(mtcars)
+data <- tbl_df(mtcars)
+m <- with(data, lm(mpg ~ wt))
+
+# Q4
+# beta_1 = corr(x,y) * sd_y / sd_x
