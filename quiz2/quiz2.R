@@ -4,6 +4,8 @@ y <- c(0.67, 0.84, 0.6, 0.18, 0.85, 0.47, 1.1, 0.65, 0.36)
 summary(lm(y ~ x))
 # 2.325 from the t value
 # This was wrong...
+# Tried the 0.053 instead :P
+# this is right
 
 # Q2:
 # 0.223 std error for the residual
@@ -27,6 +29,7 @@ predict(model, newdata = data.frame(wt = 3), interval = "predi")
 
 # Q7
 # centimeter to meter is NOT divded by 100
+# It is TIMES 100
 
 # Q9:
 model2 <- lm(mpg ~ 1, data)
