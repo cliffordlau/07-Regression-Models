@@ -43,6 +43,14 @@ anova(model2, model3)
 # our criterion, we reject, which suggests that the interaction 
 # term is necessary
 
+# that was wrong... try something else
+# Try this:
+# The P-value is larger than 0.05. So, according to our criterion, 
+# we would fail to reject, which suggests that the interaction terms
+# may not be necessary.
+
+# this is right
+
 # Q4:
 model4 <- 
   d1 %>%
@@ -54,6 +62,10 @@ model4 <-
 summary(model4)
 
 # The estimated expected change in MPG per half ton increase in weight.
+
+# Also wrong, try this:
+# The estimated expected change in MPG per half ton increase in weight 
+# for for a specific number of cylinders (4, 6, 8).
 
 # Q5:
 x <- c(0.586, 0.166, -0.042, -0.614, 11.72)
