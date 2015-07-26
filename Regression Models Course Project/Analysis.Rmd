@@ -1,0 +1,59 @@
+---
+title: "MPG Analysis"
+author: "Cliff Lau"
+output: word_document
+---
+
+##Executive Summary
+
+For this analysis, we investigated the impact of Mile Per Gallon (MPG) from automatic and manual transmission. Based on our analysis, we found no evidence to support using either automatic or manual transmission will lead to a different MPG.
+
+##Analysis
+
+We will be using the `mtcars` dataset from R as well as package ggplot2 and dplyr for our analysis.
+```{r message = F}
+library(ggplot2)
+library(dplyr)
+
+data(mtcars)
+```
+
+For the `mtcars` dataset, we're mostly interested in the mpg and am variables.
+But we should also consider someother confounding variables that might affect the mpg and mask the true effect of auto vs manual.
+
+First, we'll rename the am column and change it to factor.
+```{r}
+mtcars <- 
+  tbl_df(mtcars) %>%
+  mutate(am = as.factor(ifelse(am == 0, "automatic", "manual")),
+         cyl = as.factor(cyl))
+```
+
+Next, we performanced some summary analysis on the dataset:
+```{r}
+glimpse(mtcars)
+summary(mtcars)
+```
+
+As well as some exploratory graphs:
+```{r}
+ggplot(mtcars, aes(am, mpg, cyl)) + 
+  geom_boxplot() +
+  facet_grid(.~cyl) +
+  ggtitle("MPG for Auto vs Manual by Number of Cylinders")
+
+ggplot(mtcars, aes(wt, mpg, am))+ 
+  geom_line() +
+  geom_smooth(method = "lm") +
+  facet_grid( .~am) +
+  ggtitle("MPG based on Transmission Type")
+```
+
+Based on the plots above, we might suspect that there is no difference in auto and manual transmission. To confirm, we'll fit a linear model with the 3 predictors: am, cyl, and wt:
+
+```{r}
+fit2 <- lm(mpg ~ am + cyl + wt, data = mtcars)
+summary(fit2)
+```
+
+Based on the summary statistics above, we can see that the `am` predictor is not significant based on the p-value. Therefore, we can conclude that automatic vs manual makes no difference in terms of MPG.

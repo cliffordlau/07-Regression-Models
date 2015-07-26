@@ -45,7 +45,7 @@ ggplot(mtcars, aes(wt, mpg, am))+
   geom_line() +
   geom_smooth() +
   facet_grid( .~am) +
-  ggtitle("MPG for Auto vs Manual by Number of Cylinders")
+  ggtitle("MPG based on Transmission Type")
 
 fit1 <- lm(mpg ~ am, data = mtcars)
 fit2 <- lm(mpg ~ am + cyl + wt, data = mtcars)
