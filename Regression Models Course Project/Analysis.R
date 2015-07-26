@@ -24,3 +24,28 @@
 # including the 2 for the main report. The appendix can only include figures.
 # 
 # Include a first paragraph executive summary.
+
+library(ggplot2)
+library(dplyr)
+
+data(mtcars)
+mtcars <- 
+  tbl_df(mtcars) %>%
+  mutate(am = as.factor(ifelse(am == 0, "automatic", "manual")),
+         cyl = as.factor(cyl))
+
+glimpse(mtcars)
+
+ggplot(mtcars, aes(am, mpg, cyl)) + 
+  geom_boxplot() +
+  facet_grid(.~cyl) +
+  ggtitle("MPG for Auto vs Manual by Number of Cylinders")
+
+ggplot(mtcars, aes(wt, mpg, am))+ 
+  geom_line() +
+  geom_smooth() +
+  facet_grid( .~am) +
+  ggtitle("MPG for Auto vs Manual by Number of Cylinders")
+
+fit1 <- lm(mpg ~ am, data = mtcars)
+fit2 <- lm(mpg ~ am + cyl + wt, data = mtcars)
